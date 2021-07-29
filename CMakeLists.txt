@@ -6,11 +6,14 @@ set(CMAKE_CXX_STANDARD 17)
 set (SRCS
 		main.cpp
 		lexer.cpp
+		runtime.cpp
 		lexer_test_open.cpp
+		runtime_test.cpp
 )
 
 set(HDRS
 		lexer.h
+		runtime.h
 		test_runner_p.h
 )
 
