@@ -7,13 +7,19 @@ set (SRCS
 		main.cpp
 		lexer.cpp
 		runtime.cpp
+		statement.cpp
+		parse.cpp
 		lexer_test_open.cpp
 		runtime_test.cpp
+		statement_test.cpp
+		parse_test.cpp
 )
 
 set(HDRS
 		lexer.h
 		runtime.h
+		statement.h
+		parse.h
 		test_runner_p.h
 )
 

@@ -9,6 +9,12 @@ using namespace std;
 
 namespace runtime {
 
+	namespace {
+		const string STR_METHOD = "__str__"s;
+		const string EQ_METHOD = "__eq__"s;
+		const string LT_METHOD = "__lt__"s;
+	} // namespace
+
 	ObjectHolder::ObjectHolder(std::shared_ptr<Object> data)
 		: data_(std::move(data)) {
 	}
@@ -61,8 +67,8 @@ namespace runtime {
 	}
 
 	void ClassInstance::Print(std::ostream& os, Context& context) {
-		if (HasMethod("__str__"s, 0u)) {
-			Call("__str__"s, {}, context)->Print(os, context);
+		if (HasMethod(STR_METHOD, 0u)) {
+			Call(STR_METHOD, {}, context)->Print(os, context);
 		}
 		else {
 			os << this;
@@ -147,8 +153,8 @@ namespace runtime {
 			return bool_lhs_ptr->GetValue() == bool_rhs_ptr->GetValue();
 		}
 		ClassInstance* cls_instance_ptr = lhs.TryAs<ClassInstance>();
-		if (cls_instance_ptr && cls_instance_ptr->HasMethod("__eq__"s, 1u)) {
-			return cls_instance_ptr->Call("__eq__"s, { rhs }, context).TryAs<Bool>()->GetValue();
+		if (cls_instance_ptr && cls_instance_ptr->HasMethod(EQ_METHOD, 1u)) {
+			return cls_instance_ptr->Call(EQ_METHOD, { rhs }, context).TryAs<Bool>()->GetValue();
 		}
 		if (!bool(lhs) && !bool(rhs)) {
 			return true;
@@ -173,8 +179,8 @@ namespace runtime {
 			return bool_lhs_ptr->GetValue() < bool_rhs_ptr->GetValue();
 		}
 		ClassInstance* cls_instance_ptr = lhs.TryAs<ClassInstance>();
-		if (cls_instance_ptr && cls_instance_ptr->HasMethod("__lt__"s, 1u)) {
-			return cls_instance_ptr->Call("__lt__"s, { rhs }, context).TryAs<Bool>()->GetValue();
+		if (cls_instance_ptr && cls_instance_ptr->HasMethod(LT_METHOD, 1u)) {
+			return cls_instance_ptr->Call(LT_METHOD, { rhs }, context).TryAs<Bool>()->GetValue();
 		}
 		throw std::runtime_error("Cannot compare objects for less"s);
 	}
