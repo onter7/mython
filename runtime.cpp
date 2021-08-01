@@ -50,17 +50,13 @@ namespace runtime {
 		return Get() != nullptr;
 	}
 
-	bool IsTrue(const ObjectHolder& object) {
-		const Number* number_ptr = object.TryAs<Number>();
-		if (number_ptr) {
+	bool IsTrue(const ObjectHolder& object) {		
+		if (const Number* number_ptr = object.TryAs<Number>()) {
 			return number_ptr->GetValue() != 0;
 		}
-		const String* string_ptr = object.TryAs<String>();
-		if (string_ptr) {
+		else if (const String* string_ptr = object.TryAs<String>()) {
 			return !string_ptr->GetValue().empty();
-		}
-		const Bool* bool_ptr = object.TryAs<Bool>();
-		if (bool_ptr) {
+		} else if (const Bool* bool_ptr = object.TryAs<Bool>()) {
 			return bool_ptr->GetValue();
 		}
 		return false;
@@ -96,7 +92,7 @@ namespace runtime {
 		const std::vector<ObjectHolder>& actual_args,
 		Context& context) {
 		if (!HasMethod(method, actual_args.size())) {
-			throw std::runtime_error("Class "s + cls_.GetName() + " does not implement "s + method + " method"s);
+			throw std::runtime_error("Class "s + cls_.GetName() + " does not implement "s + method + " method with "s + std::to_string(actual_args.size()) + " parameters"s);
 		}
 		const Method* method_ptr = cls_.GetMethod(method);
 		Closure closure;

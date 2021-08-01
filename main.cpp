@@ -111,26 +111,6 @@ print y.value
 		ASSERT_EQUAL(output.str(), "2\n3\n");
 	}
 
-	void TestSelfAssignement() {
-		istringstream input(R"(
-class Test:
-  def set(a):
-    a = self
-    print a
-
-a = Test()
-b = Test()
-print(a)
-print(b)
-a.set(b)
-print(a)
-print(b)
-)");
-
-		ostringstream output;
-		RunMythonProgram(input, output);
-	}
-
 	void TestAll() {
 		TestRunner tr;
 		parse::RunOpenLexerTests(tr);
@@ -143,7 +123,6 @@ print(b)
 		RUN_TEST(tr, TestAssignments);
 		RUN_TEST(tr, TestArithmetics);
 		RUN_TEST(tr, TestVariablesArePointers);
-		RUN_TEST(tr, TestSelfAssignement);
 	}
 
 }  // namespace

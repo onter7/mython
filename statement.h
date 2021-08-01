@@ -128,7 +128,7 @@ namespace ast {
 		// Возвращает объект, содержащий значение типа ClassInstance
 		runtime::ObjectHolder Execute(runtime::Closure& closure, runtime::Context& context) override;
 	private:
-		const runtime::Class& cls_;
+		runtime::ClassInstance cls_instance_;
 		std::vector<std::unique_ptr<Statement>> args_;
 	};
 
