@@ -1,2 +1,2 @@
-# mython
+# Mython Interpreter
  
