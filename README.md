@@ -33,6 +33,7 @@ Mython defines:
 - Comparison operations for strings and integers ```==```, ```!=```, ```<=```, ```>=```, ```<```, ```>```; comparison of strings is performed lexicographically.
 - Logical operations ```and```, ```or```, ```not```.
 - Unary minus.
+
 Priority of operations (in descending order of priority):
 - Unary minus.
 - Multiplication and division.
